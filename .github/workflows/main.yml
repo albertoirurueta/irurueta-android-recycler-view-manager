@@ -33,7 +33,6 @@ jobs:
         with:
           distribution: 'jetbrains' # See 'Supported distributions' for available options
           java-version: '17'
-          script: java --version
 
       - name: Enable KVM
         run: |
