@@ -1,0 +1,122 @@
+import java.text.SimpleDateFormat
+import java.util.Date
+
+plugins {
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.dokka)
+    alias(libs.plugins.jacoco)
+    alias(libs.plugins.sonarqube)
+}
+
+android {
+    namespace = "com.irurueta.android.recyclerviewmanager.app"
+    compileSdk = 36
+
+    defaultConfig {
+        applicationId = "com.irurueta.android.recyclerviewmanager.app"
+        minSdk = 24
+        targetSdk = 36
+        versionCode = 1
+        versionName = "1.0.0"
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        val buildNumber = System.getenv("BUILD_NUMBER")
+        buildConfigField("String", "BUILD_NUMBER", "\"$buildNumber\"")
+        val dateFormatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+        buildConfigField("String", "BUILD_TIMESTAMP", "\"" + dateFormatter.format(Date()) + "\"")
+        val gitCommit = System.getenv("GIT_COMMIT")
+        buildConfigField("String", "GIT_COMMIT", "\"$gitCommit\"")
+
+        val gitBranch = System.getenv("GIT_BRANCH")
+        buildConfigField("String", "GIT_BRANCH", "\"$gitBranch\"")
+
+        val apkPrefixLabels = listOf("android-recycler-view", versionName, buildNumber)
+        base.archivesName = apkPrefixLabels.filter({ it != "" }) .joinToString("-")
+    }
+
+    buildTypes {
+        debug {
+            enableUnitTestCoverage = true
+            enableAndroidTestCoverage = true
+        }
+        release {
+            isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = "17"
+    }
+    buildFeatures {
+        compose = true
+        buildConfig = true
+    }
+}
+
+jacoco {
+    toolVersion = "0.8.13"
+}
+
+sonarqube {
+    properties {
+        property("sonar.projectKey", "albertoirurueta_android-recycler-view")
+        property("sonar.projectName", "android-recycler-view-${project.name}")
+        property("sonar.organization", "albertoirurueta-github")
+        property("sonar.host.url", "https://sonarcloud.io")
+
+        property("sonar.tests", listOf("src/test/java", "src/androidTest/java"))
+        property("sonar.test.inclusions",
+            listOf("**/*Test*/**", "src/androidTest/**", "src/test/**"))
+        property("sonar.test.exclusions",
+            listOf("**/*Test*/**", "src/androidTest/**", "src/test/**"))
+        property("sonar.sourceEncoding", "UTF-8")
+        property("sonar.sources", "src/main/java")
+        property("sonar.exclusions", "**/*Test*/**,*.json,'**/*test*/**,**/.gradle/**,**/R.class")
+
+        val libraries = project.android.sdkDirectory.path + "/platforms/android-36/android.jar"
+        property("sonar.libraries", libraries)
+        property("sonar.java.libraries", libraries)
+        property("sonar.java.test.libraries", libraries)
+        property("sonar.binaries", "build/intermediates/javac/debug/classes,build/tmp/kotlin-classes/debug")
+        property("sonar.java.binaries", "build/intermediates/javac/debug/classes,build/tmp/kotlin-classes/debug")
+
+        property("sonar.coverage.jacoco.xmlReportPaths",
+            listOf("${project.layout.buildDirectory}/reports/coverage/androidTest/debug/report.xml",
+                "${project.layout.buildDirectory}/reports/coverage/test/report.xml"))
+        property("sonar.java.coveragePlugin", "jacoco")
+        property("sonar.junit.reportsPath", "build/test-results/testDebugUnitTest, build/outputs/androidTest-results/connected")
+        property("sonar.android.lint.report", "build/reports/lint-results-debug.xml")
+    }
+}
+
+dependencies {
+    implementation(project(":lib"))
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
+    implementation(libs.hermes)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.activity.compose)
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.ui.graphics)
+    implementation(libs.androidx.ui.tooling.preview)
+    implementation(libs.androidx.material3)
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.androidx.ui.test.junit4)
+    debugImplementation(libs.androidx.ui.tooling)
+    debugImplementation(libs.androidx.ui.test.manifest)
+}
