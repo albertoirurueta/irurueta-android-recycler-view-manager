@@ -59,7 +59,7 @@ android {
 }
 
 jacoco {
-    toolVersion = "0.8.13"
+    toolVersion = "0.8.12"
 }
 
 tasks.withType<Test>() {
@@ -83,7 +83,7 @@ configurations.all {
                 // in CI server, however prevents execution of debug variant of demo app in Android
                 // Studio
                 if ("org.jacoco" == this.requested.group) {
-                    this.useVersion("0.8.13")
+                    this.useVersion("0.8.12")
                 }
             }
         }
@@ -138,7 +138,7 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
-    implementation(libs.hermes)
+    api(libs.hermes)
     testImplementation(libs.junit)
     testImplementation(libs.mockk.android)
     testImplementation(libs.mockk.agent)
