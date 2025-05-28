@@ -3,7 +3,8 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.dokka)
     alias(libs.plugins.jacoco)
-    alias(libs.plugins.sonarqube)
+    //alias(libs.plugins.sonarqube)
+    id("org.sonarqube") version "6.2.0.5505"
 }
 
 android {
@@ -90,10 +91,11 @@ configurations.all {
     }
 }
 
-sonarqube {
+sonar {
     properties {
-        property("sonar.projectKey", "albertoirurueta_android-recycler-view")
-        property("sonar.projectName", "android-recycler-view-${project.name}")
+        property("sonar.scanner.skipJreProvisioning", true)
+        property("sonar.projectKey", "albertoirurueta_android-recycler-view-manager")
+        property("sonar.projectName", "android-recycler-view-manager-${project.name}")
         property("sonar.organization", "albertoirurueta-github")
         property("sonar.host.url", "https://sonarcloud.io")
 
