@@ -43,13 +43,13 @@ jobs:
       - name: Run tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: 34
+          api-level: 35
           target: google_apis
           arch: x86_64
           script: ./gradlew clean test connectedAndroidTest lint lib:dokkaGenerate
       - name: Publish test results
-        uses: EnricoMi/publish-unit-test-result-action/composite@v1
-        if: always()
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: (!cancelled())
         with:
           files: |
             app/build/test-results/**/*.xml
