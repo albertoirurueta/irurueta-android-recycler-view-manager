@@ -3,8 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.dokka)
     alias(libs.plugins.jacoco)
-    //alias(libs.plugins.sonarqube)
-    id("org.sonarqube") version "6.2.0.5505"
+    alias(libs.plugins.sonarqube)
 }
 
 android {
@@ -95,32 +94,32 @@ sonar {
     properties {
         property("sonar.scanner.skipJreProvisioning", true)
         property("sonar.projectKey", "albertoirurueta_android-recycler-view-manager")
-        property("sonar.projectName", "android-recycler-view-manager-${project.name}")
+        property("sonar.projectName", "android-recycler-view-manager")
         property("sonar.organization", "albertoirurueta-github")
         property("sonar.host.url", "https://sonarcloud.io")
 
-        property("sonar.tests", listOf("src/test/java", "src/androidTest/java"))
-        property("sonar.test.inclusions",
-            listOf("**/*Test*/**", "src/androidTest/**", "src/test/**"))
-        property("sonar.test.exclusions",
-            listOf("**/*Test*/**", "src/androidTest/**", "src/test/**"))
-        property("sonar.sourceEncoding", "UTF-8")
-        property("sonar.sources", "src/main/java")
-        property("sonar.exclusions", "**/*Test*/**,*.json,'**/*test*/**,**/.gradle/**,**/R.class")
+        //property("sonar.tests", listOf("src/test/java", "src/androidTest/java"))
+        //property("sonar.test.inclusions",
+        //    listOf("**/*Test*/**", "src/androidTest/**", "src/test/**"))
+        //property("sonar.test.exclusions",
+        //    listOf("**/*Test*/**", "src/androidTest/**", "src/test/**"))
+        //property("sonar.sourceEncoding", "UTF-8")
+        //property("sonar.sources", "src/main/java")
+        //property("sonar.exclusions", "**/*Test*/**,*.json,'**/*test*/**,**/.gradle/**,**/R.class")
 
-        val libraries = project.android.sdkDirectory.path + "/platforms/android-36/android.jar"
-        property("sonar.libraries", libraries)
-        property("sonar.java.libraries", libraries)
-        property("sonar.java.test.libraries", libraries)
-        property("sonar.binaries", "build/intermediates/javac/debug/classes,build/tmp/kotlin-classes/debug")
-        property("sonar.java.binaries", "build/intermediates/javac/debug/classes,build/tmp/kotlin-classes/debug")
+        //val libraries = project.android.sdkDirectory.path + "/platforms/android-36/android.jar"
+        //property("sonar.libraries", libraries)
+        //property("sonar.java.libraries", libraries)
+        //property("sonar.java.test.libraries", libraries)
+        //property("sonar.binaries", "build/intermediates/javac/debug/classes,build/tmp/kotlin-classes/debug")
+        //property("sonar.java.binaries", "build/intermediates/javac/debug/classes,build/tmp/kotlin-classes/debug")
 
-        property("sonar.coverage.jacoco.xmlReportPaths",
-            listOf("${project.layout.buildDirectory}/reports/coverage/androidTest/debug/report.xml",
-                "${project.layout.buildDirectory}/reports/coverage/test/report.xml"))
-        property("sonar.java.coveragePlugin", "jacoco")
-        property("sonar.junit.reportsPath", "build/test-results/testDebugUnitTest, build/outputs/androidTest-results/connected")
-        property("sonar.android.lint.report", "build/reports/lint-results-debug.xml")
+        //property("sonar.coverage.jacoco.xmlReportPaths",
+        //    listOf("${project.layout.buildDirectory}/reports/coverage/androidTest/debug/report.xml",
+        //        "${project.layout.buildDirectory}/reports/coverage/test/report.xml"))
+        //property("sonar.java.coveragePlugin", "jacoco")
+        //property("sonar.junit.reportsPath", "build/test-results/testDebugUnitTest, build/outputs/androidTest-results/connected")
+        //property("sonar.android.lint.report", "build/reports/lint-results-debug.xml")
     }
 }
 
