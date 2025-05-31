@@ -60,7 +60,7 @@ android {
 sonar {
     properties {
         property("sonar.scanner.skipJreProvisioning", true)
-        property("sonar.projectKey", "albertoirurueta_android-recycler-view-manager")
+        property("sonar.projectKey", "albertoirurueta_irurueta-android-recycler-view-manage")
         property("sonar.projectName", "android-recycler-view-manager")
         property("sonar.organization", "albertoirurueta-github")
         property("sonar.host.url", "https://sonarcloud.io")
