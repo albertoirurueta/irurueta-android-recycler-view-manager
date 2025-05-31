@@ -82,15 +82,15 @@ sonar {
         property("sonar.binaries", "build/intermediates/javac/debug/classes,build/tmp/kotlin-classes/debug")
         property("sonar.java.binaries", "build/intermediates/javac/debug/classes,build/tmp/kotlin-classes/debug")
 
-        val buildDirectory = layout.buildDirectory
+        //val buildDirectory = buildDir
         property("sonar.coverage.jacoco.xmlReportPaths",
-            listOf("${buildDirectory}/reports/coverage/androidTest/debug/connected/report.xml",
-                "${buildDirectory}/reports/coverage/test/report.xml"))
+            listOf("build/reports/coverage/androidTest/debug/connected/report.xml",
+                "build/reports/coverage/test/report.xml"))
         property("sonar.java.coveragePlugin", "jacoco")
         property("sonar.junit.reportsPath",
-            listOf("${buildDirectory}/build/test-results/testDebugUnitTest",
-                "${buildDirectory}/build/outputs/androidTest-results/connected/debug"))
-        property("sonar.android.lint.report", "${buildDirectory}/build/reports/lint-results-debug.xml")
+            listOf("build/build/test-results/testDebugUnitTest",
+                "build/build/outputs/androidTest-results/connected/debug"))
+        property("sonar.android.lint.report", "build/build/reports/lint-results-debug.xml")
     }
 }
 
