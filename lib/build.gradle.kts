@@ -15,7 +15,7 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        val libraryVersion = "1.0.0"
+        val libraryVersion = "1.0.1"
         val buildNumber = System.getenv("BUILD_NUMBER")
         val apkPrefixLabels = listOf("android-recycler-view", libraryVersion, buildNumber)
         base.archivesName = apkPrefixLabels.filter({ it != "" }) .joinToString("-")
@@ -98,7 +98,7 @@ ext {
     // Provide your own coordinates here
     set("PUBLISH_GROUP_ID", "com.irurueta")
     // line below should have the same value as libraryVersion
-    set("PUBLISH_VERSION", "1.0.0")
+    set("PUBLISH_VERSION", "1.0.1")
     set("PUBLISH_ARTIFACT_ID", "irurueta-android-recycler-view")
 }
 
