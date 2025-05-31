@@ -102,6 +102,8 @@ ext {
     set("PUBLISH_ARTIFACT_ID", "irurueta-android-recycler-view")
 }
 
+apply(from = "${rootProject.projectDir}/scripts/publish-module.gradle")
+
 dependencies {
     implementation(libs.material)
     api(libs.hermes)
