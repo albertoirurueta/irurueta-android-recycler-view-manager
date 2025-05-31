@@ -82,7 +82,6 @@ sonar {
         property("sonar.binaries", "build/intermediates/javac/debug/classes,build/tmp/kotlin-classes/debug")
         property("sonar.java.binaries", "build/intermediates/javac/debug/classes,build/tmp/kotlin-classes/debug")
 
-        //val buildDirectory = buildDir
         property("sonar.coverage.jacoco.xmlReportPaths",
             listOf("build/reports/coverage/androidTest/debug/connected/report.xml",
                 "build/reports/coverage/test/report.xml"))
