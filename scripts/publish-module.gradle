@@ -2,6 +2,7 @@ apply plugin: 'maven-publish'
 apply plugin: 'signing'
 
 tasks.register('androidSourcesJar', Jar) {
+    mustRunAfter('generateMetadataFileForReleasePublication')
     archiveClassifier.set('sources')
     if (project.plugins.findPlugin("com.android.library")) {
         // For Android libraries
