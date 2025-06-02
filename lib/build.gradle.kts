@@ -1,9 +1,15 @@
+import com.vanniktech.maven.publish.AndroidSingleVariantLibrary
+import com.vanniktech.maven.publish.SonatypeHost
+
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.dokka)
     alias(libs.plugins.sonarqube)
+    id("com.vanniktech.maven.publish") version "0.32.0"
 }
+
+val libraryVersion = "1.0.2"
 
 android {
     namespace = "com.irurueta.android.recyclerviewmanager"
@@ -15,7 +21,6 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        val libraryVersion = "1.0.1"
         val buildNumber = System.getenv("BUILD_NUMBER")
         val apkPrefixLabels = listOf("android-recycler-view", libraryVersion, buildNumber)
         base.archivesName = apkPrefixLabels.filter({ it != "" }) .joinToString("-")
@@ -92,18 +97,6 @@ sonar {
     }
 }
 
-// Lines to add in module level build.gradle file for modules you publish
-
-ext {
-    // Provide your own coordinates here
-    set("PUBLISH_GROUP_ID", "com.irurueta")
-    // line below should have the same value as libraryVersion
-    set("PUBLISH_VERSION", "1.0.1")
-    set("PUBLISH_ARTIFACT_ID", "irurueta-android-recycler-view")
-}
-
-apply(from = "${rootProject.projectDir}/scripts/publish-module.gradle")
-
 dependencies {
     implementation(libs.material)
     api(libs.hermes)
@@ -114,4 +107,52 @@ dependencies {
     androidTestImplementation(libs.androidx.test.core.ktx)
     androidTestImplementation(libs.androidx.test.ext.junit.ktx)
     androidTestImplementation(libs.mockk.android)
+}
+
+mavenPublishing {
+    configure(AndroidSingleVariantLibrary(
+        // the published variant
+        variant = "release",
+        // whether to publish a sources jar
+        sourcesJar = true,
+        // whether to publish a javadoc jar
+        publishJavadocJar = true,
+    ))
+
+    publishToMavenCentral(SonatypeHost.DEFAULT)
+    // or when publishing to https://s01.oss.sonatype.org
+    //publishToMavenCentral(SonatypeHost.S01)
+    // or when publishing to https://central.sonatype.com/
+    //publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+
+    signAllPublications()
+
+    coordinates("com.irurueta", "irurueta-android-recycler-view-manager", libraryVersion)
+
+    pom {
+        name.set("irurueta-android-recycler-view-manager")
+        description.set("Recycler view utility to simplify adapter notifications when collections of data are modified")
+        inceptionYear.set("2025")
+        url.set("https://github.com/albertoirurueta/irurueta-android-recycler-view-manager/")
+        licenses {
+            license {
+                name.set("Apache License 2.0")
+                url.set("https://github.com/albertoirurueta/irurueta-android-recycler-view-manager/blob/main/LICENSE")
+                distribution.set("https://github.com/albertoirurueta/irurueta-android-recycler-view-manager/blob/main/LICENSE")
+            }
+        }
+        developers {
+            developer {
+                id.set("albertoirurueta")
+                name.set("Alberto Irurueta")
+                email.set("alberto@irurueta.com")
+                url.set("https://github.com/albertoirurueta/")
+            }
+        }
+        scm {
+            url.set("https://github.com/albertoirurueta/irurueta-android-recycler-view-manager/")
+            connection.set("scm:git:github.com/albertoirurueta/irurueta-android-recycler-view-manager.git")
+            developerConnection.set("scm:git:ssh://github.com/albertoirurueta/irurueta-android-recycler-view-manager.git")
+        }
+    }
 }
