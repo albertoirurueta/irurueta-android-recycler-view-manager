@@ -91,8 +91,8 @@ sonar {
                 "build/reports/coverage/test/report.xml"))
         property("sonar.java.coveragePlugin", "jacoco")
         property("sonar.junit.reportsPath",
-            listOf("build/build/test-results/testDebugUnitTest",
-                "build/build/outputs/androidTest-results/connected/debug"))
+            listOf("build/test-results/testDebugUnitTest",
+                "build/outputs/androidTest-results/connected/debug"))
         property("sonar.android.lint.report", "build/build/reports/lint-results-debug.xml")
     }
 }
