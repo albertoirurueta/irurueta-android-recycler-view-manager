@@ -10,7 +10,7 @@ plugins {
     //id("com.vanniktech.maven.publish") version "0.32.0"
 }
 
-val libraryVersion = "1.0.3"
+val libraryVersion = "1.0.4"
 
 android {
     namespace = "com.irurueta.android.recyclerviewmanager"
