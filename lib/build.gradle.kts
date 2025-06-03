@@ -7,7 +7,6 @@ plugins {
     alias(libs.plugins.dokka)
     alias(libs.plugins.sonarqube)
     alias(libs.plugins.publish)
-    //id("com.vanniktech.maven.publish") version "0.32.0"
 }
 
 val libraryVersion = "1.0.4"
