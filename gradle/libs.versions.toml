@@ -11,6 +11,7 @@ dokka = "2.0.0"
 sonarqube = "6.2.0.5505"
 mockk = "1.14.2"
 testCoreKtx = "1.6.1"
+publish = "0.32.0"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -31,3 +32,4 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 sonarqube = { id = "org.sonarqube", version.ref = "sonarqube" }
+publish = { id = "com.vanniktech.maven.publish", version.ref = "publish" }

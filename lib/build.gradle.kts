@@ -6,7 +6,8 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.dokka)
     alias(libs.plugins.sonarqube)
-    id("com.vanniktech.maven.publish") version "0.32.0"
+    alias(libs.plugins.publish)
+    //id("com.vanniktech.maven.publish") version "0.32.0"
 }
 
 val libraryVersion = "1.0.2"
