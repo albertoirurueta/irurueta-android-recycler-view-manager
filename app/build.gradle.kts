@@ -32,7 +32,8 @@ android {
         val gitBranch = System.getenv("GIT_BRANCH")
         buildConfigField("String", "GIT_BRANCH", "\"$gitBranch\"")
 
-        val apkPrefixLabels = listOf("android-recycler-view", versionName, buildNumber)
+        val apkPrefixLabels = listOf("irurueta-android-recycler-view-manager", versionName,
+            buildNumber)
         base.archivesName = apkPrefixLabels.filter({ it != "" }) .joinToString("-")
     }
 
