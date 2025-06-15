@@ -36,7 +36,7 @@ when items are added, removed, moved or changed.
 Add the following dependency to your project:
 
 ```
-implementation 'com.irurueta:irurueta-android-recycler-view-manager:1.0.5'
+implementation 'com.irurueta:irurueta-android-recycler-view-manager:1.0.6'
 ```
 
 You can refer to the sample app for a complete example of how to use this library.
