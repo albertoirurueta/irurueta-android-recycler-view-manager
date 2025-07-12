@@ -45,7 +45,7 @@ class RecyclerViewManagerTest {
 
     @Before
     fun setup() {
-        manager = RecyclerViewManager<RecyclerView.ViewHolder, Item>(
+        manager = RecyclerViewManager(
             adapter,
             { item1, item2 -> item1.id == item2.id },
             { item1, item2 -> item1.name == item2.name }
