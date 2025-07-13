@@ -8,7 +8,7 @@ plugins {
     alias(libs.plugins.publish)
 }
 
-val libraryVersion = "1.0.7"
+val libraryVersion = "1.1.1"
 
 android {
     namespace = "com.irurueta.android.recyclerviewmanager"
