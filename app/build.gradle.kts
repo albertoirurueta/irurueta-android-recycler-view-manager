@@ -16,10 +16,10 @@ android {
 
     defaultConfig {
         applicationId = "com.irurueta.android.recyclerviewmanager.app"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 36
         versionCode = 8
-        versionName = "1.1.3"
+        versionName = "1.1.4"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
