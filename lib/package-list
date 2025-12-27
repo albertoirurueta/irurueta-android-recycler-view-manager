@@ -1,0 +1,9 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+$dokka.location:com.irurueta.android.recyclerviewmanager////PointingToDeclaration/lib/com.irurueta.android.recyclerviewmanager/index.html
+$dokka.location:com.irurueta.android.recyclerviewmanager/RecyclerViewManager///PointingToDeclaration/lib/com.irurueta.android.recyclerviewmanager/-recycler-view-manager/index.html
+$dokka.location:com.irurueta.android.recyclerviewmanager/RecyclerViewManager/RecyclerViewManager/#androidx.recyclerview.widget.RecyclerView.Adapter[TypeParam(bounds=[androidx.recyclerview.widget.RecyclerView.ViewHolder])]#com.irurueta.hermes.ItemComparator[TypeParam(bounds=[kotlin.Any?])]#com.irurueta.hermes.ItemContentComparator[TypeParam(bounds=[kotlin.Any?])]/PointingToDeclaration/lib/com.irurueta.android.recyclerviewmanager/-recycler-view-manager/-recycler-view-manager.html
+$dokka.location:com.irurueta.android.recyclerviewmanager/RecyclerViewManager/adapter/#/PointingToDeclaration/lib/com.irurueta.android.recyclerviewmanager/-recycler-view-manager/adapter.html
+$dokka.location:com.irurueta.android.recyclerviewmanager/RecyclerViewManager/detector/#/PointingToDeclaration/lib/com.irurueta.android.recyclerviewmanager/-recycler-view-manager/detector.html
+$dokka.location:com.irurueta.android.recyclerviewmanager/RecyclerViewManager/notifyChanges/#kotlin.collections.List[TypeParam(bounds=[kotlin.Any?])]#kotlin.collections.List[TypeParam(bounds=[kotlin.Any?])]/PointingToDeclaration/lib/com.irurueta.android.recyclerviewmanager/-recycler-view-manager/notify-changes.html
+com.irurueta.android.recyclerviewmanager
