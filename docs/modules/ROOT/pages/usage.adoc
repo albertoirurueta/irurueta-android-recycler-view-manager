@@ -1,0 +1,162 @@
+= Usage
+
+NOTE: This documentation was generated with the assistance of AI. Please report any inaccuracies.
+
+This page shows how to drive a `RecyclerView` adapter with `RecyclerViewManager` (package
+`com.irurueta.android.recyclerviewmanager`). The examples use the same `Item` model, adapter and view holder as the
+xref:sample-app.adoc[sample app].
+
+== How it works
+
+[mermaid]
+....
+sequenceDiagram
+    participant Code as Your code
+    participant Adapter as RecyclerView.Adapter
+    participant Manager as RecyclerViewManager
+    participant RV as RecyclerView
+    Code->>Adapter: adapter.items = newItems
+    Code->>Manager: notifyChanges(oldItems, newItems)
+    Manager->>Manager: detect inserted / removed / updated / moved items
+    Manager->>Adapter: notifyItemInserted / Removed / Changed / Moved
+    Adapter->>RV: animate each change
+....
+
+== 1. Describe your data
+
+First decide two things about your data model:
+
+* what *identifies* an item, so the same item can be recognized in the old and the new list (usually an id); and
+* what makes its *content* different, so the manager knows when an item that is still present must be rebound.
+
+[source,kotlin]
+----
+include::example$item.kt[]
+----
+
+Here `id` identifies the item and `name` is its content. If an item keeps its `id` but its `name` changes, it is
+reported as *updated*. If an `id` appears only in the new list it is *inserted*, if it appears only in the old list it
+is *removed*, and if it changes position it is *moved*.
+
+== 2. Write a regular adapter
+
+The adapter is an ordinary `RecyclerView.Adapter`. Its only requirement is that its data can be replaced, here
+through a mutable `items` property.
+
+[source,kotlin]
+----
+include::example$itemAdapter.kt[]
+----
+
+== 3. Create the manager
+
+`RecyclerViewManager<VH, T>` takes three arguments:
+
+[cols="1,1,3",options="header"]
+|===
+|Parameter |Type |Purpose
+
+|`adapter`
+|`RecyclerView.Adapter<VH>`
+|The adapter that receives the notifications.
+
+|`itemComparator`
+|`ItemComparator<T>`
+|Returns `true` when two items are the same entity (for example, same id).
+
+|`itemContentComparator`
+|`ItemContentComparator<T>`
+|Returns `true` when two items that are the same entity also have the same content.
+|===
+
+Both comparators are single-method Java interfaces from hermes, so in Kotlin they can be passed as lambdas:
+
+[source,kotlin]
+----
+include::example$createManager.kt[]
+----
+
+Or, if you prefer reusable named implementations:
+
+[source,kotlin]
+----
+include::example$explicitComparators.kt[]
+----
+
+== 4. Notify changes
+
+Each time the data changes, do these two steps in this order:
+
+. Give the *new* list to the adapter, so `getItemCount()` already returns the new size.
+. Call `notifyChanges(oldItems, newItems)`, passing the *old* list first.
+
+[source,kotlin]
+----
+include::example$notifyChanges.kt[]
+----
+
+IMPORTANT: The argument order is `notifyChanges(oldItems, newItems)`. Swapping the lists, or updating the adapter
+_after_ the call, makes `RecyclerView` see notifications that don't match the adapter's data. That leads to wrong
+animations or an `IndexOutOfBoundsException` / "Inconsistency detected" crash.
+
+Call `notifyChanges` on the main thread, like any other adapter notification. The detection runs synchronously on the
+calling thread.
+
+=== What is notified
+
+[cols="1,2",options="header"]
+|===
+|Detected change |Adapter call
+
+|Item only in the new list
+|`notifyItemInserted(newPosition)`
+
+|Item only in the old list
+|`notifyItemRemoved(oldPosition)`
+
+|Same item, different content
+|`notifyItemChanged(position)`
+
+|Same item, different position
+|`notifyItemMoved(oldPosition, newPosition)`
+
+|New list is empty (`adapter.itemCount == 0`)
+|`notifyDataSetChanged()`
+|===
+
+Positions are sequential: each one refers to the list as it looks after the previous notifications have been applied,
+which is how `RecyclerView` processes a series of notifications.
+
+== Reacting to a `Flow` or `LiveData`
+
+A common pattern is to collect a list exposed by a view model and forward each emission to the manager. The adapter's
+current list is always the "old" list:
+
+[source,kotlin]
+----
+include::example$collectFlow.kt[]
+----
+
+The same idea applies to `LiveData.observe`: inside the observer, read `adapter.items`, assign the new value and call
+`notifyChanges`.
+
+== Inspecting changes without notifying
+
+The underlying detector is exposed as the `detector` property, so you can compute the changes yourself, for example
+for logging or analytics. Note that `detectChanges` takes the *new* list first:
+
+[source,kotlin]
+----
+include::example$detectChanges.kt[]
+----
+
+== Tips
+
+* Keep the identity comparator stable. Comparing whole objects (`item1 == item2`) as the identity rule turns every
+  edit into a removal plus an insertion instead of an update.
+* Make the content comparator cheap. It is called for items that are present in both lists.
+* Ids should be unique within a list. Duplicate identities make it ambiguous which item moved.
+* The manager logs each notification at `DEBUG` level with the `RecyclerViewManager` tag, which helps when diagnosing
+  unexpected animations (`adb logcat -s RecyclerViewManager`).
+
+Next: xref:sample-app.adoc[Sample app].

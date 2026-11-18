@@ -1,0 +1,83 @@
+= Installation
+
+NOTE: This documentation was generated with the assistance of AI. Please report any inaccuracies.
+
+The library is published to Maven Central as an Android library (AAR).
+
+[cols="1,3"]
+|===
+|Group ID |`com.irurueta`
+|Artifact ID |`irurueta-android-recycler-view-manager`
+|Latest release |`1.1.5`
+|License |Apache License 2.0
+|===
+
+== Requirements
+
+* Android `minSdk` 26 (Android 8.0) or later.
+* The library is compiled against SDK 36, with Java/Kotlin JVM target 17.
+* Your project must already use `androidx.recyclerview` (it is the widget the library drives).
+
+== Gradle (Kotlin DSL)
+
+Make sure `mavenCentral()` is among your repositories (in `settings.gradle.kts`):
+
+[source,kotlin]
+----
+dependencyResolutionManagement {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+----
+
+Then add the dependency to your module's `build.gradle.kts`:
+
+[source,kotlin]
+----
+dependencies {
+    implementation("com.irurueta:irurueta-android-recycler-view-manager:1.1.5")
+}
+----
+
+== Gradle (Groovy DSL)
+
+[source,groovy]
+----
+dependencies {
+    implementation 'com.irurueta:irurueta-android-recycler-view-manager:1.1.5'
+}
+----
+
+== Version catalog
+
+[source,toml]
+----
+[versions]
+recyclerViewManager = "1.1.5"
+
+[libraries]
+recycler-view-manager = { module = "com.irurueta:irurueta-android-recycler-view-manager", version.ref = "recyclerViewManager" }
+----
+
+[source,kotlin]
+----
+dependencies {
+    implementation(libs.recycler.view.manager)
+}
+----
+
+== Transitive dependencies
+
+The library exposes https://github.com/albertoirurueta/hermes[`com.irurueta:hermes`] as an `api` dependency. The
+comparator interfaces (`com.irurueta.hermes.ItemComparator` and `com.irurueta.hermes.ItemContentComparator`) and the
+change classes returned by the detector are therefore available on your compile classpath without declaring hermes
+yourself.
+
+== Building from source
+
+To use the library from source instead, clone the repository and include the `lib` module in your build, or publish
+it to your local Maven repository. See xref:building.adoc[Building, testing and contributing].
+
+Next: xref:usage.adoc[Usage].

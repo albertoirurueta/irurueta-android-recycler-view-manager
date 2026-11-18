@@ -1,0 +1,36 @@
+= User interface
+
+NOTE: This documentation was generated with the assistance of AI. Please report any inaccuracies.
+
+The library itself has no user interface: it only sends notifications to an adapter you provide. This section
+describes the xref:sample-app.adoc[sample app] (`app/`), which has a single screen whose list updates are animated
+through `RecyclerViewManager`.
+
+== Screens
+
+[cols="1,1,3",options="header"]
+|===
+|Screen |Layout |Purpose
+
+|`MainActivity`
+|`activity_main.xml`
+|Shows a `RecyclerView` filling the screen above a *Change* button. Each tap replaces the list with a new random one,
+and `RecyclerViewManager` animates the insertions, removals, moves and updates.
+|===
+
+== Components
+
+[cols="1,1,3",options="header"]
+|===
+|Component |Layout |Purpose
+
+|`ItemView`
+|`item_view.xml`
+|Custom `RelativeLayout` that renders one item's name in a `TextView`.
+
+|`ItemViewHolder`
+|-
+|`RecyclerView.ViewHolder` holding an `ItemView`.
+|===
+
+See xref:ui/navigation.adoc[Navigation flows].

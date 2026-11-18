@@ -1,0 +1,77 @@
+= Sample app
+
+NOTE: This documentation was generated with the assistance of AI. Please report any inaccuracies.
+
+The `app/` module is a minimal View-based application (package `com.irurueta.android.recyclerviewmanager.app`) that
+shows `RecyclerViewManager` animating list updates.
+
+image::recycler-view-manager.gif[Sample app animating list updates,width=300]
+
+== What it does
+
+The single screen (`MainActivity`) shows a `RecyclerView` and a *Change* button. Each tap generates a random list of
+up to 10 `Item(id, name)` entries:
+
+* the number of items changes, which produces insertions and removals;
+* the order is randomly reversed, which produces moves; and
+* some names get a trailing `*`, which produces content updates for items whose `id` is unchanged.
+
+The manager turns each new list into the matching notifications, so every kind of animation can be seen.
+
+== Source files
+
+[cols="1,3",options="header"]
+|===
+|File |Role
+
+|`Item.kt`
+|Data model: `id` is the identity, `name` the content.
+
+|`ItemView.kt`
+|Custom `RelativeLayout` that inflates `item_view.xml` and exposes an `itemName` property.
+
+|`ItemViewHolder.kt`
+|`RecyclerView.ViewHolder` that holds an `ItemView`.
+
+|`ItemAdapter.kt`
+|Adapter with a replaceable `items` list.
+
+|`MainActivity.kt`
+|Wires the `RecyclerView`, adapter and `RecyclerViewManager`, and updates the list when the button is tapped.
+|===
+
+== The relevant code
+
+The manager is created next to the adapter:
+
+[source,kotlin]
+----
+include::example$createManager.kt[]
+----
+
+And the button handler follows the two-step update described in xref:usage.adoc#_4_notify_changes[Usage]:
+
+[source,kotlin]
+----
+private fun updateItems() {
+    val oldItems = adapter.items
+    val newItems = generateItems()
+
+    // update the adapter with the new items before notifying the adapter
+    adapter.items = newItems
+    // compute changes and notify the adapter
+    manager.notifyChanges(oldItems, newItems)
+}
+----
+
+== Running it
+
+From the repository root, with a device or emulator connected:
+
+[source,bash]
+----
+./gradlew :app:installDebug
+----
+
+Or open the project in Android Studio and run the `app` configuration. See xref:ui/index.adoc[User interface] for the
+screen and component inventory.
