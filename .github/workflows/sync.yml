@@ -43,15 +43,38 @@ jobs:
           echo "next_snapshot=$NEXT_SNAPSHOT" >> "$GITHUB_OUTPUT"
           echo "sync_branch=$SYNC_BRANCH" >> "$GITHUB_OUTPUT"
 
+      # Two separate checks so a rerun can recover from a run that pushed the sync branch but
+      # failed before opening its pull request (e.g. Actions was not allowed to create PRs):
+      # - exists:    the sync branch is already on origin -> skip creating/merging/pushing it.
+      # - pr_exists: a pull request (open, merged or closed) already uses it -> skip opening one.
+      # When only the branch exists, conflict is recovered from the branch itself: a clean sync
+      # branch contains develop, while a conflicting one points at the release commit only.
       - name: Skip if this release was already synced
         id: guard
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SYNC_BRANCH: ${{ steps.versions.outputs.sync_branch }}
         run: |
           set -euo pipefail
-          if git ls-remote --exit-code --heads origin "${{ steps.versions.outputs.sync_branch }}" >/dev/null 2>&1; then
-            echo "::notice::${{ steps.versions.outputs.sync_branch }} already exists on origin; skipping."
+          if git ls-remote --exit-code --heads origin "${SYNC_BRANCH}" >/dev/null 2>&1; then
             echo "exists=true" >> "$GITHUB_OUTPUT"
+            PR_COUNT=$(gh pr list --head "${SYNC_BRANCH}" --state all --json number --jq 'length')
+            if [ "${PR_COUNT}" -gt 0 ]; then
+              echo "::notice::${SYNC_BRANCH} already exists on origin with a pull request; skipping."
+              echo "pr_exists=true" >> "$GITHUB_OUTPUT"
+            else
+              echo "::notice::${SYNC_BRANCH} already exists on origin but has no pull request; opening it."
+              echo "pr_exists=false" >> "$GITHUB_OUTPUT"
+              git fetch origin develop "${SYNC_BRANCH}"
+              if git merge-base --is-ancestor origin/develop "origin/${SYNC_BRANCH}"; then
+                echo "conflict=false" >> "$GITHUB_OUTPUT"
+              else
+                echo "conflict=true" >> "$GITHUB_OUTPUT"
+              fi
+            fi
           else
             echo "exists=false" >> "$GITHUB_OUTPUT"
+            echo "pr_exists=false" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Configure git identity
@@ -110,7 +133,7 @@ jobs:
         run: git push origin "${{ steps.versions.outputs.sync_branch }}"
 
       - name: Ensure the sync label exists
-        if: steps.guard.outputs.exists == 'false'
+        if: steps.guard.outputs.pr_exists == 'false'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -118,12 +141,12 @@ jobs:
             || gh label list --search sync >/dev/null
 
       - name: Open pull request into develop
-        if: steps.guard.outputs.exists == 'false'
+        if: steps.guard.outputs.pr_exists == 'false'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RELEASE_VERSION: ${{ steps.versions.outputs.release_version }}
           NEXT_SNAPSHOT: ${{ steps.versions.outputs.next_snapshot }}
-          CONFLICT: ${{ steps.merge.outputs.conflict }}
+          CONFLICT: ${{ steps.merge.outputs.conflict || steps.guard.outputs.conflict }}
         run: |
           if [ "${CONFLICT}" = "true" ]; then
             TITLE="Sync ${RELEASE_VERSION} (merge conflicts to resolve)"
