@@ -8,6 +8,11 @@ updates:
       gradle-dependencies:
         patterns:
           - "*"
+    ignore:
+      # Dokka 2.2.0+ fails on Android library modules ("Source sets 'androidJvm' and 'release' have the common
+      # source roots"). Remove this rule once a fixed Dokka release is available.
+      - dependency-name: "org.jetbrains.dokka*"
+        versions: [">= 2.2.0"]
 
   - package-ecosystem: github-actions
     directory: /

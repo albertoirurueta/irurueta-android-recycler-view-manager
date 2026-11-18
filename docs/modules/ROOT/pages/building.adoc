@@ -4,7 +4,7 @@ NOTE: This documentation was generated with the assistance of AI. Please report 
 
 == Prerequisites
 
-* JDK 17 or later.
+* JDK 21 or later (the `hermes` dependency is compiled for Java 21). The library itself still targets JVM 17.
 * Android SDK with platform 36 installed (Android Studio installs it for you). Point `local.properties` at it with
   `sdk.dir=...` if you don't build from Android Studio.
 * Node.js 20 or later, only if you want to build this documentation site.

@@ -34,10 +34,10 @@ notifications when items are added, removed, moved or changed.
 | | |
 | --- | --- |
 | Latest release | `1.1.5` |
-| Language | Kotlin 2.4.21 (JVM target 17) |
+| Language | Kotlin 2.4.21 (JVM target 17, builds on JDK 21) |
 | Build tool | Gradle (Kotlin DSL), Android Gradle Plugin 9.5.1 |
 | Platform | Android library (AAR) |
-| Min / compile SDK | `minSdk` 26 (Android 8.0) / `compileSdk` 36 |
+| Min / compile SDK | `minSdk` 26 (Android 8.0) / `compileSdk` 37 |
 | License | Apache License 2.0 |
 | CI | GitHub Actions: `develop` branch builds (snapshot publish), releases from `main` (Maven Central publish), security scans |
 | Quality | SonarCloud, JaCoCo coverage, Android Lint |
