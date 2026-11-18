@@ -33,7 +33,7 @@ notifications when items are added, removed, moved or changed.
 
 | | |
 | --- | --- |
-| Latest release | `1.1.5` |
+| Latest release | `1.1.6` |
 | Language | Kotlin 2.4.21 (JVM target 17, builds on JDK 21) |
 | Build tool | Gradle (Kotlin DSL), Android Gradle Plugin 9.5.1 |
 | Platform | Android library (AAR) |
@@ -61,7 +61,7 @@ Add the dependency to your module's `build.gradle.kts`:
 
 ```kotlin
 dependencies {
-    implementation("com.irurueta:irurueta-android-recycler-view-manager:1.1.5")
+    implementation("com.irurueta:irurueta-android-recycler-view-manager:1.1.6")
 }
 ```
 
@@ -69,7 +69,7 @@ Groovy DSL (`build.gradle`):
 
 ```groovy
 dependencies {
-    implementation 'com.irurueta:irurueta-android-recycler-view-manager:1.1.5'
+    implementation 'com.irurueta:irurueta-android-recycler-view-manager:1.1.6'
 }
 ```
 

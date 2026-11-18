@@ -7,6 +7,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [1.1.6] - 2026-11-18
+
 ### Added
 
 - Antora documentation site for the library.
@@ -99,7 +101,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - Publication to Maven Central as `com.irurueta:irurueta-android-recycler-view-manager`, with Dokka-generated API
   documentation.
 
-[Unreleased]: https://github.com/albertoirurueta/irurueta-android-recycler-view-manager/compare/1.1.5...HEAD
+[Unreleased]: https://github.com/albertoirurueta/irurueta-android-recycler-view-manager/compare/1.1.6...HEAD
+[1.1.6]: https://github.com/albertoirurueta/irurueta-android-recycler-view-manager/compare/1.1.5...1.1.6
 [1.1.5]: https://github.com/albertoirurueta/irurueta-android-recycler-view-manager/compare/1.1.3...1.1.5
 [1.1.3]: https://github.com/albertoirurueta/irurueta-android-recycler-view-manager/compare/1.1.2...1.1.3
 [1.1.2]: https://github.com/albertoirurueta/irurueta-android-recycler-view-manager/compare/1.1.1...1.1.2
