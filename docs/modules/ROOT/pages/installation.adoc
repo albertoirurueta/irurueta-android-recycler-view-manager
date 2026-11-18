@@ -15,7 +15,9 @@ The library is published to Maven Central as an Android library (AAR).
 == Requirements
 
 * Android `minSdk` 26 (Android 8.0) or later.
-* The library is compiled against SDK 36, with Java/Kotlin JVM target 17.
+* The library is compiled against SDK 37, with Java/Kotlin JVM target 17.
+* Its `hermes` dependency (1.3.1 and later) is compiled for Java 21. That is fine on devices, but JVM unit tests in your
+  app that load hermes classes need to run on JDK 21 or later.
 * Your project must already use `androidx.recyclerview` (it is the widget the library drives).
 
 == Gradle (Kotlin DSL)

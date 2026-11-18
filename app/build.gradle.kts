@@ -12,7 +12,7 @@ plugins {
 
 android {
     namespace = "com.irurueta.android.recyclerviewmanager.app"
-    compileSdk = 36
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "com.irurueta.android.recyclerviewmanager.app"
@@ -79,7 +79,7 @@ sonar {
         property("sonar.sources", "src/main/java")
         property("sonar.exclusions", "**/*Test*/**,*.json,'**/*test*/**,**/.gradle/**,**/R.class")
 
-        val libraries = project.android.sdkDirectory.path + "/platforms/android-36/android.jar"
+        val libraries = project.android.sdkDirectory.path + "/platforms/android-37.0/android.jar"
         property("sonar.libraries", libraries)
         property("sonar.java.libraries", libraries)
         property("sonar.java.test.libraries", libraries)

@@ -16,6 +16,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 ### Changed
 
 - Build toolchain updated to Gradle 9.9.1, Android Gradle Plugin 9.5.1 and Kotlin 2.4.21.
+- Compiled against Android SDK 37 (`compileSdk` 37; `minSdk` and `targetSdk` unchanged), as required by Compose BOM
+  2026.09.00 in the sample app.
+- Updated the `hermes` api dependency to 1.3.1. It is compiled for Java 21, so builds now run on JDK 21 and JVM unit
+  tests that load hermes classes need JDK 21 or later. The library still targets JVM 17.
 
 ### Fixed
 
