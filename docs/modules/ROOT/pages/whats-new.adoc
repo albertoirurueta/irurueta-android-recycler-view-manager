@@ -1,0 +1,17 @@
+= What's new
+
+NOTE: This documentation was generated with the assistance of AI. Please report any inaccuracies.
+
+== 1.1.5
+
+* ⚠️ The minimum supported Android version is now API 26 (Android 8.0). It was API 24 before. Apps that still
+  support API 24-25 should stay on 1.1.3.
+* ♻️ Updated dependencies and build tooling. The `RecyclerViewManager` API is unchanged.
+* 📝 New documentation site (this one), with a usage guide and code examples.
+
+== 1.1.3
+
+* ♻️ Updated the `hermes` dependency, which detects the list changes, to 1.2.0. Apps get it transitively.
+
+See the https://github.com/albertoirurueta/irurueta-android-recycler-view-manager/blob/main/CHANGELOG.md[changelog]
+for the full list of changes in each release.

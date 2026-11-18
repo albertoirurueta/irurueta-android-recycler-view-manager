@@ -1,0 +1,38 @@
+= Irurueta Android Recycler View Manager
+
+NOTE: This documentation was generated with the assistance of AI. Please report any inaccuracies.
+
+A small Android library that takes the bookkeeping out of `RecyclerView` adapter notifications. Give
+`RecyclerViewManager` the previous and the new version of your list, and it calls the right `notifyItemInserted`,
+`notifyItemRemoved`, `notifyItemMoved` and `notifyItemChanged` methods on your adapter, so `RecyclerView` animates
+each change instead of redrawing the whole list.
+
+image::recycler-view-manager.gif[Sample app animating insertions, removals and moves in a list,width=300]
+
+== Why use it
+
+* *Works with any adapter.* `RecyclerViewManager` wraps a plain `RecyclerView.Adapter`. You don't have to migrate to
+  `ListAdapter`, and you keep full control of how your data is stored.
+* *Two small rules describe your data.* One comparator says whether two items are the _same_ entity (for example, the
+  same id). The other says whether that entity's _content_ changed (for example, its name).
+* *Correct, animated notifications.* Changes are detected with the
+  https://github.com/albertoirurueta/hermes[hermes] `SequentialListItemChangeDetector`. Its positions are relative to
+  the list as each previous change is applied, which is exactly how `RecyclerView` interprets a sequence of
+  notifications.
+
+== At a glance
+
+[source,kotlin]
+----
+include::example$createManager.kt[]
+
+include::example$notifyChanges.kt[]
+----
+
+== Where to go next
+
+* xref:installation.adoc[Installation]: add the dependency to your build.
+* xref:usage.adoc[Usage]: a step-by-step guide with code examples.
+* xref:sample-app.adoc[Sample app]: the complete example shipped in this repository.
+* xref:building.adoc[Building, testing and contributing]: work on the library itself.
+* xref:reference.adoc[Reference]: API documentation (Dokka) and quality reports.
