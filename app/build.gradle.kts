@@ -18,8 +18,8 @@ android {
         applicationId = "com.irurueta.android.recyclerviewmanager.app"
         minSdk = 26
         targetSdk = 36
-        versionCode = 8
-        versionName = "1.1.5"
+        versionCode = 9
+        versionName = "1.2.0-SNAPSHOT"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 

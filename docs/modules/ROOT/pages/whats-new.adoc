@@ -2,6 +2,14 @@
 
 NOTE: This documentation was generated with the assistance of AI. Please report any inaccuracies.
 
+== 1.1.6
+
+* ♻️ Compiled against Android SDK 37. `minSdk` and `targetSdk` are unchanged, so apps don't need to change anything.
+* ♻️ Updated build tooling (Gradle 9.9.1, Android Gradle Plugin 9.5.1, Kotlin 2.4.21) and the `hermes` dependency
+  to 1.3.1. The library still targets JVM 17, but building it and running JVM unit tests that load hermes classes
+  now needs JDK 21 or later.
+* 📝 Added a changelog. The `RecyclerViewManager` API is unchanged.
+
 == 1.1.5
 
 * ⚠️ The minimum supported Android version is now API 26 (Android 8.0). It was API 24 before. Apps that still
