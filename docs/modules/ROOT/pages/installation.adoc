@@ -8,7 +8,7 @@ The library is published to Maven Central as an Android library (AAR).
 |===
 |Group ID |`com.irurueta`
 |Artifact ID |`irurueta-android-recycler-view-manager`
-|Latest release |`1.1.5`
+|Latest release |`1.1.6`
 |License |Apache License 2.0
 |===
 
@@ -39,7 +39,7 @@ Then add the dependency to your module's `build.gradle.kts`:
 [source,kotlin]
 ----
 dependencies {
-    implementation("com.irurueta:irurueta-android-recycler-view-manager:1.1.5")
+    implementation("com.irurueta:irurueta-android-recycler-view-manager:1.1.6")
 }
 ----
 
@@ -48,7 +48,7 @@ dependencies {
 [source,groovy]
 ----
 dependencies {
-    implementation 'com.irurueta:irurueta-android-recycler-view-manager:1.1.5'
+    implementation 'com.irurueta:irurueta-android-recycler-view-manager:1.1.6'
 }
 ----
 
@@ -57,7 +57,7 @@ dependencies {
 [source,toml]
 ----
 [versions]
-recyclerViewManager = "1.1.5"
+recyclerViewManager = "1.1.6"
 
 [libraries]
 recycler-view-manager = { module = "com.irurueta:irurueta-android-recycler-view-manager", version.ref = "recyclerViewManager" }
